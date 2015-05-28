@@ -12,7 +12,7 @@ $rpc = new OpenERP();
 print("========================================================================\n");
 print("Testing login\n");
 print("========================================================================\n");
-$x = $rpc->login("admin", "a", "mobile_client", "http://127.0.0.1:8069/xmlrpc/");
+$x = $rpc->login("admin", "a", "mobile_client", "http://127.0.0.1:8069/xmlrpc/", false, 0, 'UTF-8', false);
 
 print_r($x);
 print("\n");
@@ -36,7 +36,39 @@ print("\n");
 print("========================================================================\n");
 print("Testing search read\n");
 print("========================================================================\n");
-$data = $rpc->searchread(array('|',array("name","like","HDD"),array("name","like","ML")), "product.product", array("name_template"));
+$data = $rpc->searchread(array('|',array("name","like","combine"),array("name","like","machine")), "product.product", array("name_template"));
+// $data = $rpc->searchread(array(array("name","like","HDD")), "product.product");
+print_r($data);
+print("\n");
+print("\n");
+
+print("========================================================================\n");
+print("Testing create\n");
+print("========================================================================\n");
+$new_product = $rpc->create(array('name' => 'Test Product'), "product.product");
+// $data = $rpc->searchread(array(array("name","like","HDD")), "product.product");
+print_r($new_product);
+print("\n");
+print("\n");
+
+print("========================================================================\n");
+print("Testing update\n");
+print("========================================================================\n");
+$categ_ids = $rpc->search(array(array('name', 'ilike', 'Computer')), "product.category");
+print_r($categ_ids);
+print("\n");
+print("\n");
+
+$data = $rpc->write($new_product, array('categ_id' => $categ_ids[0]), "product.product");
+// $data = $rpc->searchread(array(array("name","like","HDD")), "product.product");
+print_r($data);
+print("\n");
+print("\n");
+
+print("========================================================================\n");
+print("Testing unlink\n");
+print("========================================================================\n");
+$data = $rpc->unlink($new_product, "product.product");
 // $data = $rpc->searchread(array(array("name","like","HDD")), "product.product");
 print_r($data);
 print("\n");
