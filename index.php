@@ -9,19 +9,38 @@ print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $rpc = new OpenERP();
 
+print("========================================================================\n");
+print("Testing login\n");
+print("========================================================================\n");
 $x = $rpc->login("admin", "a", "mobile_client", "http://127.0.0.1:8069/xmlrpc/");
 
-print ($x);
-
+print_r($x);
+print("\n");
+print("\n");
 #echo $rpc->create( array('name'=>'teja22s', 'code'=> "bakbak"), "res.country");
 
 //echo $rpc->create( array('name'=>'teja22s', 'login'=> "bakbak"), "res.users");
- 
+
 //print_r($rpc->get_fields('sale.order'));
 
 //print_r($rpc->get_default_values('sale.order'));
 
+print("========================================================================\n");
+print("Testing read\n");
+print("========================================================================\n");
 $data = $rpc->read(array(1,2), array(), "product.product");
+print_r($data);
+print("\n");
+print("\n");
+
+print("========================================================================\n");
+print("Testing search read\n");
+print("========================================================================\n");
+$data = $rpc->searchread(array('|',array("name","like","HDD"),array("name","like","ML")), "product.product", array("name_template"));
+// $data = $rpc->searchread(array(array("name","like","HDD")), "product.product");
+print_r($data);
+print("\n");
+print("\n");
 
 #$data = $rpc->searchread(  array(array('name','=','Service')),  "product.product");  // CORRECT
 
