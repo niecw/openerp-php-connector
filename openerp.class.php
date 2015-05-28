@@ -17,7 +17,7 @@
  */
 session_start();
 
-include("xmlrpc-2.2.2/lib/xmlrpc.inc");
+include("xmlrpc-3.0.1/lib/xmlrpc.inc");
 
 class OpenERP {
 
